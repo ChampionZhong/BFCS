@@ -1,0 +1,386 @@
+packages:
+  aizynthfinder:
+    method: steps
+    steps:
+      - cmd: apt-get update && apt-get install -y --no-install-recommends build-essential gcc g++ python3-dev libc6-dev && rm -rf /var/lib/apt/lists/*
+      - cmd: pip install --upgrade pip setuptools wheel
+      - cmd: 'pip install --only-binary :all: "numpy<2.0" || pip install "numpy<2.0"'
+      - cmd: 'pip install --only-binary :all: rdkit || pip install rdkit'
+      - cmd: 'pip install --only-binary :all: aizynthfinder || (pip install "cython>=0.29,<3.0" && pip install --no-build-isolation aizynthfinder) || pip install aizynthfinder'
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: Install with pip, prefer pre-built wheels to avoid compilation
+  Bio:
+    method: pip
+    install_cmd: uv pip install --system biopython
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  chembl_downloader:
+    method: pip
+    install_cmd: uv pip install --system chembl_downloader
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  ChemInformant:
+    method: pip
+    install_cmd: uv pip install --system ChemInformant
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  chemprop:
+    method: pip
+    install_cmd: uv pip install --system requests chemprop
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.11-slim.sif
+    description: pip install
+  chempy:
+    method: conda
+    install_cmd: conda install -c conda-forge chempy pytest python=3.10 -y
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-latest.sif
+    description: conda install
+  cirpy:
+    method: pip
+    install_cmd: uv pip install --system cirpy
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  datamol:
+    method: conda
+    install_cmd: conda install -c conda-forge datamol -y
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-latest.sif
+    description: conda install
+  deepchem:
+    method: pip
+    install_cmd: uv pip install --system deepchem
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  DeepPurpose:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.8-slim.sif
+    system_deps:
+    - git
+    install_cmd: mkdir -p /tmp && printf '[safe]\n\tdirectory = *\n' > /tmp/.gitconfig
+      && HOME=/tmp uv pip install --system git+https://github.com/bp-kelley/descriptastorus
+      && uv pip install --system DeepPurpose
+    description: pip install
+  descriptastorus:
+    method: custom
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    steps:
+    - type: pip
+      cmd: uv pip install --system rdkit scikit-learn kyotocabinet
+    - type: pip
+      cmd: uv pip install --system git+https://github.com/bp-kelley/descriptastorus
+    description: pip install
+  drugbank_downloader:
+    method: pip
+    install_cmd: uv pip install --system drugbank-downloader
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  dscribe:
+    method: pip
+    install_cmd: uv pip install --system dscribe
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  gpaw:
+    method: pip
+    install_cmd: uv pip install --system gpaw
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    system_deps:
+    - build-essential
+    - gcc
+    - gfortran
+    - libopenblas-dev
+    - liblapack-dev
+    description: pip install
+  guacamol:
+    method: pip
+    install_cmd: uv pip install --system guacamol
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  mendeleev:
+    method: pip
+    install_cmd: uv pip install --system mendeleev
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  molmass:
+    method: pip
+    install_cmd: uv pip install --system molmass
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  mordred:
+    method: pip
+    install_cmd: uv pip install --system rdkit mordred
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  nistchempy:
+    method: pip
+    install_cmd: uv pip install --system nistchempy
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  periodictable:
+    method: pip
+    install_cmd: uv pip install --system periodictable
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  pubchempy:
+    method: pip
+    install_cmd: uv pip install --system pubchempy
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  pybel:
+    method: pip
+    install_cmd: uv pip install --system pybel
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  pyEQL:
+    method: pip
+    install_cmd: uv pip install --system pyEQL
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  pyscf:
+    method: pip
+    install_cmd: uv pip install --system pyscf
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  rdkit:
+    method: conda
+    install_cmd: conda install -c conda-forge python=3.10 rdkit -y
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-latest.sif
+    description: conda install
+  robert:
+    method: pip
+    install_cmd: uv pip install --system "robert>=2.1.0"
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.11-slim.sif
+    description: pip install (robert>=2.1.0 requires Python>=3.11, let robert decide numpy version)
+  selfies:
+    method: pip
+    install_cmd: uv pip install --system selfies
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  stk:
+    method: pip
+    install_cmd: uv pip install --system "numpy<2" stk
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  tdc:
+    method: pip
+    install_cmd: 'uv pip install --system PyTDC numpy pandas tqdm scikit-learn fuzzywuzzy
+      seaborn '
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  torchdrug:
+    method: custom
+    steps:
+      - cmd: apt-get update && apt-get install -y --no-install-recommends g++ gcc libxrender1 libxext6 && rm -rf /var/lib/apt/lists/*
+      - cmd: pip install torch==1.9.0
+      - cmd: pip install torch-scatter==2.0.9 torch-cluster==1.5.9
+      - cmd: pip install torchdrug
+    env_vars:
+      MPLBACKEND: "Agg"
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.8-slim.sif
+    description: custom install
+  useful_rdkit_utils:
+    method: pip
+    install_cmd: uv pip install --system useful_rdkit_utils
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    description: pip install
+  # -------------------------------------------------------------------------------------------------
+  nnunetv2:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    steps:
+    - type: pip
+      cmd: pip install torch
+    - type: pip
+      cmd: pip install nnunetv2
+    description: pip install
+  monai:
+    method: pip
+    install_cmd: uv pip install --system monai
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  boltz:
+    method: pip
+    install_cmd: pip uninstall -y numpy && uv pip install --system boltz[cuda] -U
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install (uninstall base image numpy first, then let boltz[cuda] install compatible numpy version automatically)
+  biomni:
+    method: pip
+    install_cmd: uv pip install --system biomni --upgrade
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  torchio:
+    method: conda
+    install_cmd: conda install -c conda-forge torchio python=3.10 libiconv -y
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    description: conda install
+    env_vars:
+      LD_LIBRARY_PATH: /opt/conda/lib:$LD_LIBRARY_PATH
+  scanpy:
+    method: conda
+    install_cmd: conda install -c conda-forge scanpy python-igraph leidenalg -y
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    description: conda install
+  chai_lab:
+    method: pip
+    install_cmd: uv pip install --system chai_lab==0.6.1
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  alphafold2_pytorch:
+    method: pip
+    install_cmd: uv pip install --system alphafold2-pytorch
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  scvi_tools:
+    method: conda
+    install_cmd: conda install scvi-tools -c conda-forge
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    description: conda install
+  paperai:
+    method: pip
+    install_cmd: uv pip install --system paperai
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  fastmri:
+    method: pip
+    install_cmd: uv pip install --system fastmri
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  batchgenerators:
+    method: pip
+    install_cmd: uv pip install --system --upgrade batchgenerators
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  ncbi_genome_download:
+    method: conda
+    install_cmd: conda install -c bioconda ncbi-genome-download
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    description: conda install
+  cebra:
+    method: pip
+    install_cmd: uv pip install --system 'cebra[dev,integrations,datasets]'
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.12-slim-torch.sif
+    description: pip install
+  mace_torch:
+    method: pip
+    install_cmd: uv pip install --system mace-torch
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  jcvi:
+    method: custom
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    steps:
+    - type: pip
+      cmd: uv pip install --system git+https://github.com/tanghaibao/jcvi.git
+    - type: pip
+      cmd: uv pip install --system jcvi
+    description: custom install
+  goatools:
+    method: conda
+    install_cmd: conda install -c bioconda goatools
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    description: conda install
+  gto:
+    method: pip
+    install_cmd: uv pip install --system gto
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+# -------------------------------------------------------------------------------------------------
+  mace:
+    method: pip
+    install_cmd: pip install mace-torch
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    description: pip install
+  omicverse:
+    method: conda
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    install_cmd: conda install omicverse -c conda-forge
+    description: conda install
+  chroma:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install generate-chroma
+    description: pip install
+  lungmask:
+    method: pip 
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install lungmask
+    description: pip install
+  tape:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install tape_proteins
+    description: pip install
+  pyriemann:
+    method: conda
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    install_cmd: conda install -c conda-forge pyriemann
+    description: conda install
+  bioemu:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install bioemu
+    description: pip install
+  anndata:
+    method: conda
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    install_cmd: conda install anndata -c conda-forge
+    description: conda install
+  spikeinterface:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install "spikeinterface[full]"
+    description: pip install
+  chainer_chemistry:
+    method: custom
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    steps:
+      - type: conda
+        cmd: conda install -n base conda==4.6.14
+      - type: conda
+        cmd: conda install -c rdkit rdkit==2019.03.2.0
+      - type: pip
+        cmd: pip install chainer-chemistry
+    description: custom install
+  medclip:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install medclip
+    description: pip install
+  biosppy:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: uv pip install biosppy
+    description: uv pip install
+  micro_sam:
+    method: conda
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/miniconda3-torch.sif
+    install_cmd: conda install -c conda-forge micro_sam
+    description: conda install
+  brainrender:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install brainrender
+    description: pip install
+  plip:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install plip
+    description: pip install
+  omegafold:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim-torch.sif
+    install_cmd: pip install git+https://github.com/HeliXonProtein/OmegaFold.git
+    description: pip install
+# -------------------------------------------------------------------------------------------------
+  networkx:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.11-slim.sif
+    install_cmd: uv pip install --system networkx
+    description: pip install
+  sympy:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    install_cmd: pip install sympy
+    description: pip install
+  biotite:
+    method: pip
+    base_image: /mnt/petrelfs/zhongzhanping/code/agent4sci/containers/base/python-3.10-slim.sif
+    install_cmd: pip install biotite
+    description: pip install
