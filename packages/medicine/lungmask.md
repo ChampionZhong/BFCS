@@ -1,0 +1,36 @@
+# lungmask
+
+[🔙 Back to Main Repo](../../../README.md) | [🔗 Original Repo](https://github.com/JoHof/lungmask)
+
+![Tool Count](https://img.shields.io/badge/Agent_Tools-8-blue?style=flat-square)
+![Category](https://img.shields.io/badge/Category-Medicine-green?style=flat-square)
+![Status](https://img.shields.io/badge/Import_Test-Passed-success?style=flat-square)
+
+## 📖 Overview
+
+`lungmask` is a Python package that uses pretrained U-Net models to automatically segment lungs (and optionally lung lobes) from chest CT scans, including cases with severe pathologies.
+
+> **Note**: This documentation lists the **agent-ready wrapper functions** generated for this package. These functions have been strictly typed, docstring-enhanced, and tested for import stability within a standardized Apptainer environment.
+
+## 🛠️ Available Agent Tools
+
+Below is the list of **8** functions optimized for LLM tool-use.
+
+| **Tool Name (Wrapper)**   | **Source**          | **File Path**     | **Arguments (Type)**        | **Description**                |
+| ------------------------- | ------------------- | ----------------- | --------------------------- | ------------------------------ |
+| `lungmask_utils_bbox_3D` | `lungmask.utils.bbox_3D` | `lungmask/utils.py` | `labelmap: numpy.ndarray, margin: int = 2` | `Compute bounding box of a 3D labelmap used in lungmask for cropping and postprocessing of segmentation volumes. This function inspects a multi-dimensional numpy labelmap (typically a 3D segmentation volume produced or consumed by the lungmask package) and computes per-axis minimum and maximum indices that enclose all non-zero labels. The bounding box is expanded by the integer margin on each axis and clipped to the labelmap extents. In the lungmask workflow this is commonly used to crop volumes to the lung region before further processing (for example to reduce computation during model inference, to crop input for visualization, or to restrict fusion operations between models such as LTRCLobes and R231). For numpy arrays following the package convention, the first axis is slices (z), the second is chest-to-back (y), and the third is right-to-left (x), so for a 3D labelmap the returned array corresponds to [zmin, zmax, ymin, ymax, xmin, xmax]. The returned upper bounds are exclusive (suitable for Python slicing).` |
+| `lungmask_utils_crop_and_resize` | `lungmask.utils.crop_and_resize` | `lungmask/utils.py` | `img: numpy.ndarray, width: int = 192, height: int = 192` | `lungmask.utils.crop_and_resize crops a 2D CT slice to the detected body region and resizes the crop to the specified target size. This preprocessing step is used in the lungmask pipeline to focus downstream lung segmentation models (for example the U-net variants described in the README) on the relevant body area, reduce input dimensionality to the network input size, and normalize spatial extent across slices.` |
+| `lungmask_utils_keep_largest_connected_component` | `lungmask.utils.keep_largest_connected_component` | `lungmask/utils.py` | `mask: numpy.ndarray` | `lungmask.utils.keep_largest_connected_component: Return a binary mask that contains only the largest connected component from an input segmentation label map. This function is used in the lungmask pipeline to remove small disconnected islands (false positive fragments) that can appear in per-slice or per-volume lung segmentation outputs, keeping the primary contiguous lung region used for downstream processing (e.g., volume measurements, lobe assignment, or visualization).` |
+| `lungmask_utils_load_input_image` | `lungmask.utils.load_input_image` | `lungmask/utils.py` | `path: str, disable_tqdm: bool = False, read_metadata: bool = False` | `Loads an image from a filesystem path and returns it as a SimpleITK Image. If path points to a file, the function uses SimpleITK's ImageFileReader to load that file. If path points to a directory, the function searches for DICOM series in the directory (calls read_dicoms with original=False, primary=False) and selects the largest series by voxel count (product of each volume's GetSize()) when multiple series are present. This function is intended to produce a sitk.Image suitable as input to the lungmask inference pipeline (for example LMInferer.apply) and to downstream U-net models described in the package README.` |
+| `lungmask_utils_postprocessing` | `lungmask.utils.postprocessing` | `lungmask/utils.py` | `label_image: numpy.ndarray, spare: list = [], disable_tqdm: bool = False, skip_below: int = 3` | `lungmask.utils.postprocessing Post-process a labeled lung segmentation volume by remapping small connected components to neighboring labels, keeping only the largest connected component per original label, and removing labels listed in a spare mapping. This function is used in the lungmask pipeline to clean and fuse outputs from different models (for example when fusing LTRCLobes and R231 results), to remove small false-positive regions, and to ensure coherent left/right or lobe labelings as described in the project README (two-label outputs: 1=Right lung, 2=Left lung; five-label lobe outputs: 1..5 correspond to specific lobes).` |
+| `lungmask_utils_preprocess` | `lungmask.utils.preprocess` | `lungmask/utils.py` | `img: numpy.ndarray, resolution: list = [192, 192]` | `Preprocesses a 3D CT volume by intensity clipping, per-slice cropping to the body, and resizing each slice to a fixed in-plane resolution. This function is used in the lungmask pipeline to prepare numpy array volumes for U-net based lung segmentation models (for example U-net(R231) and LTRCLobes) by mapping raw Hounsfield Unit (HU) intensities into a stable range, removing image borders outside the body, and producing uniformly sized 2D slices that the models expect.` |
+| `lungmask_utils_reshape_mask` | `lungmask.utils.reshape_mask` | `lungmask/utils.py` | `mask: numpy.ndarray, tbox: numpy.ndarray, origsize: tuple` | `Reshapes and places a predicted 2D mask back into the original image coordinate space using a provided bounding box. This function is used in the lungmask segmentation pipeline to reverse a prior crop/resize operation: models often predict a mask on a cropped and rescaled field-of-view; reshape_mask rescales that predicted mask with nearest-neighbor interpolation and inserts it into a zero background of the original CT image size so that the segmentation aligns with the original image coordinates used by downstream processing or file output (e.g., SimpleITK images or ITK formats described in the README).` |
+| `lungmask_utils_simple_bodymask` | `lungmask.utils.simple_bodymask` | `lungmask/utils.py` | `img: numpy.ndarray` | `lungmask.utils.simple_bodymask computes a fast, heuristic binary body mask for a single CT slice by thresholding at -500 Hounsfield units (HU), performing morphological cleanup, keeping the largest connected component, and rescaling the result back to the input resolution. This function is used in the lungmask pipeline to isolate the patient body / chest region on a single 2D CT slice so subsequent lung segmentation steps can focus on the relevant image area and ignore background and small artifacts.` |
+
+## ⚖️ License
+
+Original Code License: Apache-2.0
+
+Wrapper Code & Documentation: Apache-2.0
+
+*This file was automatically generated on February 26, 2026.*
