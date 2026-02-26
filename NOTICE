@@ -1,0 +1,80 @@
+BFCS: A Large-Scale Execution-Based Benchmark for Function Calling in Science
+Copyright 2026 Zhanping Zhong
+
+This product includes software developed by the open-source community.
+The wrapper code, documentation, and infrastructure scripts in this repository are licensed under the Apache License 2.0.
+
+However, this project encapsulates, interacts with, and provides containerized environments for numerous third-party scientific packages. These original packages retain their respective copyrights and are distributed under their own licenses. Users of this repository are responsible for complying with the original licenses of the underlying packages when executing them.
+
+===========================================================================
+Third-Party Software Acknowledgements
+===========================================================================
+
+1. MIT License
+
+The following packages are utilized under the MIT License:
+
+- aizynthfinder (https://github.com/MolecularAI/aizynthfinder)
+- bioemu (https://github.com/microsoft/bioemu)
+- boltz (https://github.com/jwohlwend/boltz)
+- chembl-downloader (https://github.com/cthoyt/chembl-downloader)
+- ChemInformant (https://github.com/HzaCode/ChemInformant)
+- chemprop (https://github.com/chemprop/chemprop)
+- CIRpy (https://github.com/mcs07/CIRpy)
+- deepchem (https://github.com/deepchem/deepchem)
+- drugbank_downloader (https://github.com/cthoyt/drugbank_downloader)
+- guacamol (https://github.com/BenevolentAI/guacamol)
+- mace (https://github.com/ACEsuit/mace)
+- mendeleev (https://github.com/lmmentel/mendeleev)
+- NistChemPy (https://github.com/IvanChernyshov/NistChemPy)
+- PubChemPy (https://github.com/mcs07/PubChemPy)
+- pybel (https://github.com/pybel/pybel)
+- robert (https://github.com/jvalegre/robert)
+- spikeinterface (https://github.com/SpikeInterface/spikeinterface)
+- stk (https://github.com/lukasturcani/stk)
+- TDC (https://github.com/mims-harvard/TDC)
+- useful_rdkit_utils (https://github.com/PatWalters/useful_rdkit_utils)
+
+1. Apache License 2.0
+
+The following packages are utilized under the Apache License 2.0:
+
+- batchgenerators (https://github.com/MIC-DKFZ/batchgenerators)
+- CEBRA (https://github.com/AdaptiveMotorControlLab/CEBRA)
+- chai-lab (https://github.com/chaidiscovery/chai-lab)
+- datamol (https://github.com/datamol-io/datamol)
+- dscribe (https://github.com/SINGROUP/dscribe)
+- lungmask (https://github.com/JoHof/lungmask)
+- MONAI (https://github.com/Project-MONAI/MONAI)
+- ncbi-genome-download (https://github.com/kblin/ncbi-genome-download)
+- nnUNet (https://github.com/MIC-DKFZ/nnUNet)
+- pyscf (https://github.com/pyscf/pyscf)
+- selfies (https://github.com/aspuru-guzik-group/selfies)
+- torchdrug (https://github.com/DeepGraphLearning/torchdrug)
+- torchio (https://github.com/TorchIO-project/torchio)
+
+3. BSD Licenses (2-Clause & 3-Clause)
+
+The following packages are utilized under the BSD Licenses:
+
+- anndata (https://github.com/scverse/anndata)
+- biopython (https://github.com/biopython/biopython)
+- chempy (https://github.com/bjodah/chempy)
+- DeepPurpose (https://github.com/kexinhuang12345/DeepPurpose)
+- descriptastorus (https://github.com/bp-kelley/descriptastorus)
+- molmass (https://github.com/cgohlke/molmass)
+- mordred (https://github.com/mordred-descriptor/mordred)
+- periodictable (https://github.com/pkienzle/periodictable)
+- pyRiemann (https://github.com/pyRiemann/pyRiemann)
+- rdkit (https://github.com/rdkit/rdkit)
+- scanpy (https://github.com/scverse/scanpy)
+- tape (https://github.com/songlab-cal/tape)
+
+4. GNU General Public Licenses (GPL / LGPL)
+
+The following packages are utilized under the GPL/LGPL Licenses. Users should be aware of the copyleft obligations when executing or distributing environments containing these packages:
+
+- pyEQL (LGPLv3) (https://github.com/KingsburyLab/pyEQL)
+- gpaw (GPLv3+) (https://gitlab.com/gpaw/gpaw)
+
+===========================================================================

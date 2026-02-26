@@ -1,4 +1,5 @@
 # BFCS: A Large-Scale Execution-Based Benchmark for Function Calling in Science
+
 This repository contains the official implementation of the paper: **"BFCS: A Large-Scale Execution-Based Benchmark for Function Calling in Science"**.
 
 ## 🌟 Overview
@@ -34,15 +35,16 @@ Unlike static benchmarks, BFCS adopts an **execution-first philosophy**:
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
+
 We use **Apptainer** (formerly Singularity) to manage complex scientific dependencies.
 
 ```bash
 # Install Apptainer (refer to official docs for details)
 sudo apt-get update && sudo apt-get install -y apptainer
-
 ```
 
 ### 2. Download Data & Containers
+
 The benchmark is stratified into three scenarios:
 
 - **Simple:** Atomic instruction synthesis.
@@ -54,26 +56,80 @@ git clone https://github.com/ChampionZhong/BFCS.git
 cd BFCS
 # Build scientific environment containers
 bash containers/build_apptainers_*.sh
-
 ```
 
 ### 3. Run Evaluation
 
 ```bash
 python evalution/run_eval.py --model_name your_model_name --scenario simple
-
 ```
 
 ## 📂 Dataset Taxonomy
-BFCS covers a wide range of scientific disciplines:
 
-- **Chemistry:** (e.g., `pyscf`, `rdkit`) 
-- **Biology:** (e.g., `biopython`, `scanpy`) 
-- **Medicine/Pharmacy:** (e.g., `monai`, `tdc`) 
-- **Material Science:** (e.g., `gpaw`, `dscribe`) 
+*Overview of repositories and corresponding packages which can be `import` in Python environment, covering the category assigned to each repository and the total count of available wrapper functions.*
+
+| # | Repo Name (Original Repo) | Package Name (Package Card) | Category | Tools | LICENSE |
+| :--: | :----------------------------------------------------------: | :----------------------------------------------------------: | :-------: | :---: | :----------: |
+| 1 | [AiZynthFinder](https://github.com/MolecularAI/aizynthfinder) | [aizynthfinder](packages/pharmacy/aizynthfinder.md) | Pharmacy | 3 | MIT |
+| 2 | [anndata](https://github.com/scverse/anndata) | [anndata](packages/biology/anndata.md) | Biology | 8 | BSD-3-Clause |
+| 3 | [batchgenerators](https://github.com/MIC-DKFZ/batchgenerators) | [batchgenerators](packages/medicine/batchgenerators.md) | Medicine | 26 | Apache-2.0 |
+| 4 | [bioemu](https://github.com/microsoft/bioemu) | [bioemu](packages/biology/bioemu.md) | Biology | 153 | MIT |
+| 5 | [biopython](https://github.com/biopython/biopython) | [Bio](packages/biology/Bio.md) | Biology | 4 | BSD-3-Clause |
+| 6 | [boltz](https://github.com/jwohlwend/boltz) | [boltz](packages/pharmacy/boltz.md) | Pharmacy | 46 | MIT |
+| 7 | [CEBRA](https://github.com/AdaptiveMotorControlLab/CEBRA) | [cebra](packages/biology/cebra.md) | Biology | 14 | Apache-2.0 |
+| 8 | [chai-lab](https://github.com/chaidiscovery/chai-lab) | [chai_lab](packages/biology/chai_lab.md) | Biology | 12 | Apache-2.0 |
+| 9 | [chembl-downloader](https://github.com/cthoyt/chembl-downloader) | [chembl_downloader](packages/pharmacy/chembl_downloader.md) | Pharmacy | 2 | MIT |
+| 10 | [ChemInformant](https://github.com/HzaCode/ChemInformant) | [ChemInformant](packages/chemistry/ChemInformant.md) | Chemistry | 5 | MIT |
+| 11 | [chemprop](https://github.com/chemprop/chemprop) | [chemprop](packages/pharmacy/chemprop.md) | Pharmacy | 4 | MIT |
+| 12 | [chempy](https://github.com/bjodah/chempy) | [chempy](packages/chemistry/chempy.md) | Chemistry | 45 | BSD-2-Clause |
+| 13 | [CIRpy](https://github.com/mcs07/CIRpy) | [cirpy](packages/chemistry/cirpy.md) | Chemistry | 6 | MIT |
+| 14 | [datamol](https://github.com/datamol-io/datamol) | [datamol](packages/chemistry/datamol.md) | Chemistry | 13 | Apache-2.0 |
+| 15 | [deepchem](https://github.com/deepchem/deepchem) | [deepchem](packages/pharmacy/deepchem.md) | Pharmacy | 128 | MIT |
+| 16 | [DeepPurpose](https://github.com/kexinhuang12345/DeepPurpose) | [DeepPurpose](packages/pharmacy/DeepPurpose.md) | Pharmacy | 31 | BSD-3-Clause |
+| 17 | [descriptastorus](https://github.com/bp-kelley/descriptastorus) | [descriptastorus](packages/chemistry/descriptastorus.md) | Chemistry | 3 | BSD-3-Clause |
+| 18 | [drugbank_downloader](https://github.com/cthoyt/drugbank_downloader) | [drugbank_downloader](packages/pharmacy/drugbank_downloader.md) | Pharmacy | 1 | MIT |
+| 19 | [dscribe](https://github.com/SINGROUP/dscribe) | [dscribe](packages/material/dscribe.md) | Material | 7 | Apache-2.0 |
+| 20 | [gpaw](https://gitlab.com/gpaw/gpaw) | [gpaw](packages/material/gpaw.md) | Material | 263 | GPLv3+ |
+| 21 | [guacamol](https://github.com/BenevolentAI/guacamol) | [guacamol](packages/pharmacy/guacamol.md) | Pharmacy | 5 | MIT |
+| 22 | [lungmask](https://github.com/JoHof/lungmask) | [lungmask](packages/medicine/lungmask.md) | Medicine | 8 | Apache-2.0 |
+| 23 | [mace](https://github.com/ACEsuit/mace) | [mace](packages/material/mace.md) | Material | 7 | MIT |
+| 24 | [MedCLIP](https://github.com/RyanWangZf/MedCLIP) | [medclip](packages/medicine/medclip.md) | Medicine | 3 | Unknown |
+| 25 | [mendeleev](https://github.com/lmmentel/mendeleev) | [mendeleev](packages/chemistry/mendeleev.md) | Chemistry | 23 | MIT |
+| 26 | [molmass](https://github.com/cgohlke/molmass) | [molmass](packages/chemistry/molmass.md) | Chemistry | 14 | BSD-3-Clause |
+| 27 | [MONAI](https://github.com/Project-MONAI/MONAI) | [monai](packages/medicine/monai.md) | Medicine | 96 | Apache-2.0 |
+| 28 | [mordred](https://github.com/mordred-descriptor/mordred) | [mordred](packages/chemistry/mordred.md) | Chemistry | 1 | BSD-3-Clause |
+| 29 | [ncbi-genome-download](https://github.com/kblin/ncbi-genome-download) | [ncbi_genome_download](packages/biology/ncbi_genome_download.md) | Biology | 21 | Apache-2.0 |
+| 30 | [NistChemPy](https://github.com/IvanChernyshov/NistChemPy) | [nistchempy](packages/chemistry/nistchempy.md) | Chemistry | 1 | MIT |
+| 31 | [nnUNet](https://github.com/MIC-DKFZ/nnUNet) | [nnunetv2](packages/medicine/nnunetv2.md) | Medicine | 20 | Apache-2.0 |
+| 32 | [periodictable](https://github.com/pkienzle/periodictable) | [periodictable](packages/chemistry/periodictable.md) | Chemistry | 21 | BSD-3-Clause |
+| 33 | [PubChemPy](https://github.com/mcs07/PubChemPy) | [pubchempy](packages/chemistry/pubchempy.md) | Chemistry | 2 | MIT |
+| 34 | [pybel](https://github.com/pybel/pybel) | [pybel](packages/biology/pybel.md) | Biology | 46 | MIT |
+| 35 | [pyEQL](https://github.com/KingsburyLab/pyEQL) | [pyEQL](packages/chemistry/pyEQL.md) | Chemistry | 4 | LGPLv3 |
+| 36 | [pyRiemann](https://github.com/pyRiemann/pyRiemann) | [pyriemann](packages/medicine/pyriemann.md) | Medicine | 100 | BSD-3-Clause |
+| 37 | [pyscf](https://github.com/pyscf/pyscf) | [pyscf](packages/chemistry/pyscf.md) | Chemistry | 449 | Apache-2.0 |
+| 38 | [rdkit](https://github.com/rdkit/rdkit) | [rdkit](packages/chemistry/rdkit.md) | Chemistry | 110 | BSD-3-Clause |
+| 39 | [robert](https://github.com/jvalegre/robert) | [robert](packages/chemistry/robert.md) | Chemistry | 38 | MIT |
+| 40 | [scanpy](https://github.com/scverse/scanpy) | [scanpy](packages/biology/scanpy.md) | Biology | 21 | BSD-3-Clause |
+| 41 | [selfies](https://github.com/aspuru-guzik-group/selfies) | [selfies](packages/chemistry/selfies.md) | Chemistry | 13 | Apache-2.0 |
+| 42 | [spikeinterface](https://github.com/SpikeInterface/spikeinterface) | [spikeinterface](packages/biology/spikeinterface.md) | Biology | 159 | MIT |
+| 43 | [stk](https://github.com/lukasturcani/stk) | [stk](packages/chemistry/stk.md) | Chemistry | 12 | MIT |
+| 44 | [tape](https://github.com/songlab-cal/tape) | [tape](packages/biology/tape.md) | Biology | 7 | BSD-3-Clause |
+| 45 | [TDC](https://github.com/mims-harvard/TDC) | [tdc](packages/pharmacy/tdc.md) | Pharmacy | 118 | MIT |
+| 46 | [torchdrug](https://github.com/DeepGraphLearning/torchdrug) | [torchdrug](packages/pharmacy/torchdrug.md) | Pharmacy | 16 | Apache-2.0 |
+| 47 | [torchio](https://github.com/TorchIO-project/torchio) | [torchio](packages/medicine/torchio.md) | Medicine | 3 | Apache-2.0 |
+| 48 | [useful_rdkit_utils](https://github.com/PatWalters/useful_rdkit_utils) | [useful_rdkit_utils](packages/chemistry/useful_rdkit_utils.md) | Chemistry | 8 | MIT |
+
+## 📃 License & Acknowledgements
+
+The source code of the wrappers and the build scripts in this repository are licensed under the Apache License 2.0.
+
+However, the software packages installed within the containers retain their original licenses. Users are responsible for complying with the licenses of the underlying packages when using them:
+
+**ATTENTION** GPLv3+: `gpaw` (Please note that using `gpaw` may impose copyleft obligations)
 
 ## ✍️ Citation
-If you find this work helpful, please cite our KDD 2026 paper:
+
+If you find this work helpful, please cite our work:
 <!-- booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining}, -->
 ```code snippet
 @misc{zhong2026bfcs,
