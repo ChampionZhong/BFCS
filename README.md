@@ -1,6 +1,9 @@
-# BFCS: A Large-Scale Execution-Based Benchmark for Function Calling in Science
+
+# <img src="./figs/logo.png" style="height: 2em; vertical-align: middle" alt="BFCS" /> BFCS: A Large-Scale Execution-Based Benchmark for Function Calling in Science
 
 This repository contains the official implementation of the paper: **"BFCS: A Large-Scale Execution-Based Benchmark for Function Calling in Science"**.
+
+![](./figs/pipeline.png)
 
 ## 🌟 Overview
 
@@ -65,6 +68,8 @@ python evalution/run_eval.py --model_name your_model_name --scenario simple
 ```
 
 ## 📂 Dataset Taxonomy
+
+![](./figs/category.png)
 
 *Overview of repositories and corresponding packages which can be `import` in Python environment, covering the category assigned to each repository and the total count of available wrapper functions.*
 
