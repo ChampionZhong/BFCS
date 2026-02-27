@@ -48,23 +48,30 @@ sudo apt-get update && sudo apt-get install -y apptainer
 
 ### 2. Download Data & Containers
 
-The benchmark is stratified into three scenarios:
+**Dataset** The benchmark data is ready to use and located directly in the `./data` directory. It is stratified into three cognitive scenarios:
 
-- **Simple:** Atomic instruction synthesis.
-- **Multiple:** Tool selection among distractors.
-- **Parallel:** Compositional batch processing.
+- **`./data/simple.jsonl`**: Atomic instruction synthesis without distractors.
+- **`./data/multiple.jsonl`**: Tool selection among semantically similar distractors.
+- **`./data/parallel.jsonl`**: Compositional batch processing requiring multiple independent calls.
+
+BFCS relies on isolated Apptainer environments. The specific installation methods and build instructions for each package are detailed in `./containers/config.yaml`.
+
+To save time, you do not need to build these from scratch. We have published the 9 base Apptainer images and 48 package-specific Apptainer images  directly to the repository's GitHub Packages (GHCR). You can download or pull them directly:
 
 ```bash
+# Clone the repository
 git clone https://github.com/ChampionZhong/BFCS.git
 cd BFCS
-# Build scientific environment containers
-bash containers/build_apptainers_*.sh
+
+# Example: Pulling a specific package container directly from GitHub Packages
+# Make sure to replace <package_name> with the target tool (e.g., rdkit, biopython)
+apptainer pull docker://ghcr.io/championzhong/bfcs/bfcs-<package_name>:latest
 ```
 
 ### 3. Run Evaluation
 
 ```bash
-python evalution/run_eval.py --model_name your_model_name --scenario simple
+python evaluation/run_eval.py --model_name your_model_name --scenario simple
 ```
 
 ## 📂 Dataset Taxonomy
@@ -145,5 +152,4 @@ If you find this work helpful, please cite our work:
   howpublished = {\url{[https://github.com/ChampionZhong/BFCS](https://github.com/ChampionZhong/BFCS)}},
   year={2026},
 }
-
 ```
